@@ -1,0 +1,60 @@
+---
+title: "R Notebook - Week 1 - Irregular Data 1"
+output: html_notebook
+---
+```{r}
+### Load Libraries ###
+library(tidyverse)
+```
+
+```{r}
+### Load Data ###
+
+```
+
+```{r}
+### Rename Variables ###
+new_names <- c("state", "total_students", "aian_students", "hispanic_students", "black_students",
+               "white_students", "nhpi_students", "multiracial_students", "stud_teach_ratio",
+               "male_students", "female_students")
+```
+
+```{r}
+### Collapse Data ###
+
+```
+
+```{r}
+### Convert Raw Values to Percentages ###
+pct_names <- c("pct_aian", "pct_hisp", "pct_black", "pct_white", "pct_nhpi", "pct_multiracial",
+               "pct_male", "pct_female")
+student_groups <- c("aian_students", "hispanic_students", "black_students", "white_students", "nhpi_students",
+          "multiracial_students", "male_students", "female_students")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
