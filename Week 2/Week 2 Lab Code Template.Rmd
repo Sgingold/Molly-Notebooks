@@ -1,0 +1,28 @@
+---
+title: "Week 2 Lab Code Outline"
+output: html_notebook
+---
+
+```{r}
+### Load Libraries ###
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+### Load Data ###
+var_names <- c("iso_code", "country", "tot_immigrants_19", "pct_immigrants_19", "pct_child_immigrants_19", 
+               "tot_emigrants_19", "pct_emigrants_19", "tot_ref_to_18", "pct_child_ref_to_18", 
+               "tot_ref_from_18", "pct_child_ref_from_18", "tot_as_to_18", "tot_as_from_18", 
+               "tot_in_displace_18", "hr_instruments")
+```
+
+```{r}
+### Standardize Missing Values ###
+ctypes <- c("text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric",
+            "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric")
+
+ctypes_new <- c("text", "text", "guess", "guess", "numeric", "guess", "guess", "guess", "guess", "guess", 
+             "guess", "guess", "guess", "guess", "guess")
+```
+
