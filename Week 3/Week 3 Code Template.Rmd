@@ -1,0 +1,37 @@
+---
+title: "Week 3 Lab - Spatial Data"
+output: html_notebook
+---
+
+```{r}
+## Load libraries
+library(tidyverse)
+library(sf)
+library(spData)
+library(ggthemes)
+```
+
+```{r}
+## Load and merge data
+
+```
+
+```{r}
+## Create new variables
+
+```
+
+```{r}
+## Plot reopening score
+
+```
+
+```{r}
+## Plot cases per capita
+
+```
+
+
+
+
+
