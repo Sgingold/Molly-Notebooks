@@ -7,6 +7,7 @@ library(tidyverse)
 library(sf)
 library(spData)
 library(ggthemes) # https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/
+library(RColorBrewer)
 
 ## Read and merge data
 covid_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
@@ -15,7 +16,7 @@ reopening_ranks <- read_csv("covid reopening rank.csv")
 
 us_covid <- inner_join(covid_cases, reopening_ranks, by = c("state" = "STATE"))
 us_covid <- inner_join(us_covid, us_states, by = c("state" = "NAME"))
-us_covid_geo <- st_sf(us_covid_geo)
+us_covid_geo <- st_sf(us_covid)
 view(us_covid_geo)
 
 ## Create variable
@@ -49,4 +50,16 @@ ggplot(cases_deciles) +
   labs(title = "COVID-19 Cases per Capita") +
   theme_void() +
   theme(plot.title = element_text(hjust = 0.5)) +
-  scale_fill_brewer(palette = "BrBG")
+  scale_fill_brewer(palette = "YlOrRd")
+
+mycolors <- colorRampPalette(brewer.pal(8, "Set2"))(10)
+pinks <- c("#fff7f3", "#fde0dd", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497", "#ae017e",
+           "#7a0177", "#49006a", "#000000")
+    # helpful tool for creating palettes: https://colorbrewer2.org/#type=sequential&scheme=Greys&n=9
+
+ggplot(cases_deciles) +
+  geom_sf(aes(fill = (decile))) +
+  labs(title = "COVID-19 Cases per Capita") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_manual(values = pinks)
