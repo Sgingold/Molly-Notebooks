@@ -6,3 +6,14 @@ library(tidyverse)
 library(shiny)
 
 spotify <- read_csv('Spotify data.csv')
+spotify
+
+# Clean and subset data
+spotify$artists <- str_replace_all(spotify$artists, "['']", "")
+spotify$artists <- str_replace_all(spotify$artists, "\\[|\\]", "")
+keep = c("Fiona Apple", "Metallica", "Taylor Swift")
+artist_subset <- spotify %>%
+  filter(artists %in% keep)
+view(artist_subset)
+
+
