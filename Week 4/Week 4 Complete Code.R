@@ -55,9 +55,10 @@ server <- function(input, output) {
   })
   
   output$scatter <- renderPlot({
-    plot(x = data(), y = artist_subset$year,
-    xlab = input$feature,
-    ylab = "Year")
+    ggplot() +
+      geom_point(mapping = aes(x = data(), y = artist_subset$year), size = 3, color = "pink") +
+      labs(x = input$feature, y = "Year") +
+      theme_minimal()
   })
   
   output$text <- renderText({
