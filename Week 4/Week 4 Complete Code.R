@@ -6,7 +6,6 @@
 
 library(tidyverse)
 library(shiny)
-library(shinyWidgets) # https://rdrr.io/cran/shinyWidgets/
 
 spotify <- read_csv('Spotify data.csv')
 spotify
