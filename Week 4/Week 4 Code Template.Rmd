@@ -6,9 +6,10 @@ output: html_notebook
 ```{load libraries}
 library(tidyverse)
 library(shiny)
+library(shinyWidgets)
 ```
 
-```{load data}
+```{load and prepare data}
 spotify <- read_csv('Spotify data.csv')
 ```
 

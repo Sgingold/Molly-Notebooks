@@ -1,9 +1,12 @@
 # Week 4 Complete Code
 # Objective: use RShiny to create interactive data visualizations
+    # Create reactive data
+    # Create categorical user input
 # Data retrieved from: https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks
 
 library(tidyverse)
 library(shiny)
+library(shinyWidgets) # https://rdrr.io/cran/shinyWidgets/
 
 spotify <- read_csv('Spotify data.csv')
 spotify
@@ -22,13 +25,24 @@ ui <- fluidPage(
   
   selectInput("feature", "Select an audio feature to display",
               list("energy", "danceability",
-                   "tempo", "acousticness")
-              ),
-  textOutput("result"),
+                   "tempo", "acousticness")),
   
   plotOutput("scatter", click = "plot_click"),
   
-  verbatimTextOutput("text")
+  verbatimTextOutput("text"),
+  
+  tags$head(
+    tags$style(HTML("
+      body {
+        background-color: gray;
+        color: pink;
+        font-family: serif;
+      }
+      * {
+      font-family: serif;
+      }"
+    ))
+  )
 )
 
 # Component 2: Server Function
@@ -47,7 +61,7 @@ server <- function(input, output) {
   })
   
   output$text <- renderText({
-    paste0("This song is titled ", input$plot_click$x)
+    paste0("For this song, the ", input$feature, " is ", input$plot_click$x)
   })
 }
 
