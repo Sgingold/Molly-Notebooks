@@ -4,5 +4,18 @@
 library(tidyverse)
 library(tidytext)
 
+setwd(getwd())
+mystery_text <-  read_file("mystery_text.txt")
+my_text <- tibble(text = mystery_text)
+my_text
 
+# Prepare for analysis (tokenize, remove stop words, etc)
+text_words <- unnest_tokens(my_text, words, text, token = "words")
+text_words <- anti_join(text_words, stop_words, by = c("words" = "word"))
+text_words
 
+# Part of speech analysis
+
+# Sentiment analysis
+
+# Visualize results
