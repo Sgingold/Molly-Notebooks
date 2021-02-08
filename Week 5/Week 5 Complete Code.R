@@ -31,11 +31,14 @@ join_sentiment <- function(text_df, sentiment_df) {
   return(inner_join(text_df, sentiment_df, by = c("words" = "word")))
 }
 words_bing <- join_sentiment(unique_words, sentiment_bing)
-view(words_bing)
 words_nrc <- join_sentiment(unique_words, sentiment_nrc)
-view(words_nrc)
 # Compare sentiment libraries 
 nrow(words_bing)
 nrow(words_nrc)
-
+# Visualize sentiment analysis
+ggplot(words_bing) +
+  geom_histogram(aes(sentiment), stat = "count")
+ggplot(words_nrc) +
+  geom_histogram(aes(sentiment), stat = "count") +
+  theme(axis.text.x = element_text(angle = 45))
 
