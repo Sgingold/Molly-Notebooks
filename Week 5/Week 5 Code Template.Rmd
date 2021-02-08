@@ -14,6 +14,25 @@ library(tidytext)
 ```
 
 ```{r}
+## Prepare for analysis (tokenize, remove stop words)
 
 ```
+
+```{r}
+## Part of speech analysis
+
+```
+
+```{r}
+## Sentiment analysis 
+
+```
+
+```{r}
+## Sentiment analysis histograms
+
+```
+
+
+
 
