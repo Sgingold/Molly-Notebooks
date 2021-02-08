@@ -1,0 +1,19 @@
+---
+title: "Week 5: Text Processing I"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(tidytext)
+```
+
+```{r}
+## Load and prepare text 
+
+```
+
+```{r}
+
+```
+
