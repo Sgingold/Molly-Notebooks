@@ -20,9 +20,22 @@ view(unique_words)
 # Part of speech analysis
 words_pos <- left_join(unique_words, parts_of_speech, by = c("words" = "word"))
 view(words_pos)
+nouns <- words_pos %>%
+  filter(pos == "Noun")
+view(nouns)
 
 # Sentiment analysis
-
-
+sentiment_bing <- get_sentiments("bing")
+sentiment_nrc <- get_sentiments("nrc") 
+join_sentiment <- function(text_df, sentiment_df) {
+  return(inner_join(text_df, sentiment_df, by = c("words" = "word")))
+}
+words_bing <- join_sentiment(unique_words, sentiment_bing)
+view(words_bing)
+words_nrc <- join_sentiment(unique_words, sentiment_nrc)
+view(words_nrc)
+# Compare sentiment libraries 
+nrow(words_bing)
+nrow(words_nrc)
 
 
