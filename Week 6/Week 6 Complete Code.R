@@ -43,7 +43,8 @@ ud_model <- udpipe_download_model(language = "english")
 ud_model <- udpipe_load_model(ud_model$file_model)
 
 # Prepare our parsed data by adding a topic modeling id
-parsed16$topic_model_id <- unique_identifier(parsed16, fields = c("doc_id", "paragraph_id", "sentence_id"))
+parsed16$topic_model_id <- unique_identifier(parsed16, 
+                                             fields = c("doc_id", "paragraph_id", "sentence_id"))
 nouns16 <- parsed16 %>%
   filter(upos == "NOUN") %>%
   document_term_frequencies(document = "topic_model_id", term = "lemma")
@@ -55,26 +56,21 @@ dtm16_freq <- dtm_remove_lowfreq(dtm, minfreq = 2)
 head(dtm_colsums(dtm16_freq))
 
 # Create topic model
-model <- LDA(dtm16_freq, k = 4, method = "Gibbs", 
+model <- LDA(dtm16_freq, k = 4, method = "Gibbs",
              control = list(nstart = 5, burnin = 2000, best = TRUE, seed = 1:5))
 
 # Visualize model
-terms <- predict(model, type = "terms", min_posterior = 0.05, min_terms = 4)
 scores <- predict(model, newdata = dtm, type = "topics", 
-                  labels = c("topic1", "topic2", "topic3", "topic4"))
+                  labels = c("a", "b", "c", "d"))
 topics <- merge(parsed16, scores, by.x = "topic_model_id", by.y = "doc_id")
+topic_terms <- predict(model, type = "terms", min_posterior = 0.05, min_terms = 5)
 
-wordnetwork <- subset(topics, topic %in% 1 & lemma %in% terms[[1]]$term)
+wordnetwork <- subset(topics, topic %in% 1 & lemma %in% topic_terms[[1]]$term)
 wordnetwork <- cooccurrence(wordnetwork, group = c("topic_model_id"), term = "lemma")
 wordnetwork <- graph_from_data_frame(wordnetwork)
 
-ggraph(wordnetwork, layout = "fr") +
-  geom_edge_link(aes(width = cooc, edge_alpha = cooc), edge_colour = "pink")  +
-  geom_node_text(aes(label = name), col = "darkgreen", size = 4) +
+ggraph(wordnetwork, layout = "gem") +
+  geom_edge_link(aes(width = cooc, edge_alpha = cooc), edge_colour = "skyblue")  +
+  geom_node_text(aes(label = name), col = "black", size = 4) +
   labs(title = "Cooccurrence of Nouns in Topic 1") +
   theme_void()
-
-
-
-
-
