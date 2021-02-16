@@ -1,0 +1,27 @@
+---
+title: "Natural Language Processing Week 2"
+output: html_notebook
+---
+
+```{r}
+# File paths
+
+# Option 1
+path <- "/Users/mollybair/Documents/GitHub/Molly-Notebooks/Week 6"
+paste0(path, filename)
+# Option 2
+path <- "./Week 6/"
+paste0(path, filename)
+
+```
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(tidytext)
+library(pdftools)
+library(readr)
+library(udpipe)
+library(SnowballC)
+```
+
