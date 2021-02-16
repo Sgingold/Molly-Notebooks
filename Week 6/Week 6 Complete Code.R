@@ -20,23 +20,21 @@ library(readr)
 library(udpipe)
 library(SnowballC)
 
-# Create function to read pdf files
-fnames <- list("Fiscal Report 2016.pdf", "Fiscal Report 2015.pdf", "Fiscal Report 2014.pdf")
-df_names <- list("df16", "df15", "df14")
-pdf_to_tokens <- function(fname, df_name) {
-  temp_text <- pdf_text(paste0(path, fname)) %>%
-    readr::read_lines()
-  df <- tibble(text = temp_text)
-  df <- unnest_tokens(df, words, text, token = "words")
-  assign(x = df_name, value = df, envir = globalenv())
-  return(df_name)
+# Create function to read text files
+fnames <- list("fr2016.txt", "fr2015.txt", "fr2014.txt")
+obj_names <- list("parsed16", "parsed15", "parsed14")
+parse_text <- function(fname, parsed_name) {
+  text <- read_file(paste0(path, fname))
+  parsed <- udpipe(text, "english")
+  assign(x = parsed_name, value = parsed, envir = globalenv())
+  return(parsed_name)
 }
 
 for (index in 1:length(fnames)) {
-  pdf_to_text(fnames[[index]], df_names[[index]])
+  parse_text(fnames[[index]], obj_names[[index]])
 }
-df15
 
+view(parsed16)
 
 # Sentiment analysis
 
