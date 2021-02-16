@@ -25,3 +25,8 @@ library(udpipe)
 library(SnowballC)
 ```
 
+```{r}
+# Create function to read text files
+
+```
+
