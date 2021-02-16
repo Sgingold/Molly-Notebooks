@@ -19,14 +19,21 @@ paste0(path, filename)
 # Load libraries
 library(tidyverse)
 library(tidytext)
-library(pdftools)
-library(readr)
 library(udpipe)
-library(SnowballC)
+library(topicmodels)
+library(igraph)
+library(ggraph)
+library(ggplot2)
 ```
 
 ```{r}
 # Create function to read text files
 
 ```
+
+```{r}
+# Sentiment analysis of particular token
+
+```
+
 
