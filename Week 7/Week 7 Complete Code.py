@@ -9,15 +9,41 @@ Created on Mon Feb 22 10:34:41 2021
 import pandas as pd
 
 def csv_to_df(filename, keep):
+    """
+    This function takes a csv file and returns a pandas dataframe
+
+    Parameters
+    ----------
+    filename : string
+        name of csv file
+    keep : list of strings
+        names of columns to keep from file
+
+    Returns
+    -------
+    df : pandas dataframe
+
+    """
     df = pd.read_csv(filename, usecols=keep)
     return df
 
 def rename_variables(df, current_names, new_names):
-    # This function takes in a dataframe, a list of the current names of variables in that
-    # dataframe, and the list of new variable names
-    # This function creates a dictionary that maps existing names to new names
-    # It then uses that dictionary to rename the columns in the dataframe
-    # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rename.html
+    """
+    This function renames all variables in a pandas dataframe
+
+    Parameters
+    ----------
+    df : pandas dataframe
+    current_names : list of strings
+        current names of columns in df
+    new_names : list of strings
+        new names of columns in df
+
+    Returns
+    -------
+    renamed_df : pandas df
+
+    """
     name_dict = {}
     for i in range(0, len(current_names)):
         key = current_names[i]
@@ -28,10 +54,42 @@ def rename_variables(df, current_names, new_names):
     return renamed_df
 
 def group(df, group_var):
+    """
+    This function groups a dataframe by a specified variable, with summed groups
+
+    Parameters
+    ----------
+    df : pandas dataframe
+    group_var : string
+        name of variable to group by
+
+    Returns
+    -------
+    grouped : pandas dataframe
+
+    """
     grouped = df.groupby(by=group_var).sum()
     return grouped
 
 def count_to_pct(df, count_vars, total_count, pct_names):
+    """
+
+    Parameters
+    ----------
+    df : pandas dataframe
+        dataframe with variable/s populated by counts
+    count_vars : list of strings
+        names of variables that are populated by counts
+    total_count : string
+        name of variable that represents total count of a category
+    pct_names : list of strings
+        names of new percentage variables
+
+    Returns
+    -------
+    df : pandas dataframe
+
+    """
     for i in range(0, len(count_vars)):
         value = round((df[count_vars[i]]/df[total_count])*100, 2)
         df[pct_names[i]] = value
