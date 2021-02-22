@@ -27,6 +27,10 @@ def rename_variables(df, current_names, new_names):
     renamed_df = df.rename(columns=name_dict)
     return renamed_df
 
+def group(df, group_var):
+    grouped = df.groupby(by=group_var).count()
+    return grouped
+
 def main():
     cols = ['LSTATE', 'MEMBER', 'AM', 'HI', 'BL', 'WH', 'HP', 'TR', 'STUTERATIO',\
             'TOTMENROL', 'TOTFENROL']
@@ -38,7 +42,10 @@ def main():
                     'black_students', 'white_students', 'nhpi_students',\
                         'mr_students', 'st_ratio', 'male_students', 'female_students']
     ps_df = rename_variables(ps_df, col_names, new_col_names)
-    print(ps_df.head())
+    #print(ps_df.head())
+    
+    by_state = group(ps_df, 'state')
+    print(by_state.head())
 
     
     
