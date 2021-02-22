@@ -28,8 +28,14 @@ def rename_variables(df, current_names, new_names):
     return renamed_df
 
 def group(df, group_var):
-    grouped = df.groupby(by=group_var).count()
+    grouped = df.groupby(by=group_var).sum()
     return grouped
+
+def count_to_pct(df, count_vars, total_count, pct_names):
+    for i in range(0, len(count_vars)):
+        value = round((df[count_vars[i]]/df[total_count])*100, 2)
+        df[pct_names[i]] = value
+    return df
 
 def main():
     cols = ['LSTATE', 'MEMBER', 'AM', 'HI', 'BL', 'WH', 'HP', 'TR', 'STUTERATIO',\
@@ -45,12 +51,14 @@ def main():
     #print(ps_df.head())
     
     by_state = group(ps_df, 'state')
+    #print(by_state.head())
+    
+    student_groups = ['aian_students', 'hispanic_students', 'black_students',\
+                      'white_students', 'mr_students', 'male_students', 'female_students']
+    pct_names = ['pct_aian', 'pct_black', 'pct_white', 'pct_nhpi', 'pct_mr',\
+                 'pct_male', 'pct_female']
+    by_state = count_to_pct(by_state, student_groups, 'total_students', pct_names)
     print(by_state.head())
-
-    
-    
-    
-
 
 main()
 
